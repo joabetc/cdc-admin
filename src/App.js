@@ -3,6 +3,19 @@ import 'purecss/build/pure-min.css';
 import './css/side-menu.css';
 
 class App extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      list: [
+        {
+          name: 'Jack',
+          email: 'jack@doe.com',
+          password: '123456'
+        }]
+    };
+  }
+
   render() {
     return (
       <div id="layout">
@@ -58,10 +71,16 @@ class App extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Alberto</td>                
-                      <td>alberto.souza@caelum.com.br</td>                
-                    </tr>
+                    {
+                      this.state.list.map(function(author) {
+                        return (
+                          <tr>
+                            <td>{ author.name }</td>
+                            <td>{ author.email }</td>
+                          </tr>
+                        );
+                      });
+                    }
                   </tbody>
                 </table> 
               </div>             
