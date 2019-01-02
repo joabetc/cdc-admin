@@ -79,7 +79,7 @@ class App extends Component {
                             <td>{ author.email }</td>
                           </tr>
                         );
-                      });
+                      })
                     }
                   </tbody>
                 </table> 
