@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import 'purecss/build/pure-min.css';
+import './css/side-menu.css';
 
 class App extends Component {
   render() {
