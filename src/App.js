@@ -12,12 +12,11 @@ class App extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     $.ajax({
       url: "http://cdc-react.herokuapp.com/api/autores",
       dataType: 'json',
       success: function(response) {
-        console.log(response);
         this.setState({ list: response });
       }.bind(this)
     });
@@ -32,13 +31,10 @@ class App extends Component {
         <div id="menu">
             <div className="pure-menu">
                 <a className="pure-menu-heading" href="#">Company</a>
-
                 <ul className="pure-menu-list">
                     <li className="pure-menu-item"><a href="#" className="pure-menu-link">Home</a></li>
                     <li className="pure-menu-item"><a href="#" className="pure-menu-link">Autor</a></li>
                     <li className="pure-menu-item"><a href="#" className="pure-menu-link">Livro</a></li>
-
-
                 </ul>
             </div>
         </div>
@@ -81,7 +77,7 @@ class App extends Component {
                     {
                       this.state.list.map(function(author) {
                         return (
-                          <tr>
+                          <tr key={author.key}>
                             <td>{ author.nome }</td>
                             <td>{ author.email }</td>
                           </tr>
