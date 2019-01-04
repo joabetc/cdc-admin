@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   sendForm(event) {
-    event.prevendDefault();
+    event.preventDefault();
     $.ajax({
       url: "http://cdc-react.herokuapp.com/api/autores",
       contentType: 'application/json',
@@ -42,8 +42,8 @@ class App extends Component {
         senha: this.state.password
       }),
       success: function(response) {
-        console.log('Success');
-      },
+        this.setState({list: response});
+      }.bind(this),
       error: function(error) {
         console.log('Error');
       }
