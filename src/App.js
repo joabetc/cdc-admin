@@ -3,6 +3,7 @@ import 'purecss/build/pure-min.css';
 import './css/side-menu.css';
 import $ from 'jquery';
 import CustomInput from './components/CustomInput';
+import CustomSubmit from './components/CustomSubmit';
 
 class App extends Component {
 
@@ -90,10 +91,7 @@ class App extends Component {
                   <CustomInput id="nome" type="text" name="nome" value={this.state.name} onChange={this.setName} label="Nome" />
                   <CustomInput id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} label="e-mail" />
                   <CustomInput id="senha" type="password" name="senha" value={this.state.password} onChange={this.setPassword} label="Senha" />
-                  <div className="pure-control-group">                                  
-                    <label></label> 
-                    <button type="submit" className="pure-button pure-button-primary">Gravar</button>                                    
-                  </div>
+                  <CustomSubmit label="Gravar"/>
                 </form>             
 
               </div>  
