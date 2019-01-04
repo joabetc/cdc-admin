@@ -3,7 +3,7 @@ import $ from 'jquery';
 import CustomInput from './components/CustomInput';
 import CustomSubmit from './components/CustomSubmit';
 
-export class AuthorForm extends Component {
+class AuthorForm extends Component {
 
   constructor() {
     super();
@@ -31,7 +31,7 @@ export class AuthorForm extends Component {
         senha: this.state.password
       }),
       success: function(response) {
-        this.setState({list: response});
+        this.props.updateListCallback(response);
       }.bind(this),
       error: function(error) {
         console.log('Error');
@@ -65,22 +65,7 @@ export class AuthorForm extends Component {
   }
 }
 
-export class AuthorsTable extends Component {
-
-  constructor() {
-    super();
-    this.state = { list: [] };
-  }
-  
-  componentDidMount() {
-    $.ajax({
-      url: "http://cdc-react.herokuapp.com/api/autores",
-      dataType: 'json',
-      success: function(response) {
-          this.setState({ list: response });
-      }.bind(this)
-    });
-  }
+class AuthorsTable extends Component {
 
   render() {
     return (
@@ -94,7 +79,7 @@ export class AuthorsTable extends Component {
             </thead>
             <tbody>
             {
-              this.state.list.map(function(author) {
+              this.props.list.map(function(author) {
                 return (
                   <tr key={ author.key }>
                   <td>{ author.nome }</td>
@@ -105,6 +90,38 @@ export class AuthorsTable extends Component {
             }
             </tbody>
         </table> 
+      </div>
+    );
+  }
+}
+
+export default class AuthorBox extends Component {
+
+  constructor() {
+    super();
+    this.state = { list: [] };
+    this.updateList = this.updateList.bind(this);
+  }
+  
+  componentDidMount() {
+    $.ajax({
+      url: "http://cdc-react.herokuapp.com/api/autores",
+      dataType: 'json',
+      success: function(response) {
+          this.setState({ list: response });
+      }.bind(this)
+    });
+  }
+
+  updateList(newList) {
+    this.setState({list: newList});
+  }
+
+  render() {
+    return (
+      <div>
+        <AuthorForm updateListCallback={this.updateList}/>
+        <AuthorsTable list={this.state.list}/>
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'purecss/build/pure-min.css';
 import './css/side-menu.css';
 
-import { AuthorForm, AuthorsTable } from './Author';
+import Author from './Author';
 
 class App extends Component {
 
@@ -28,8 +28,7 @@ class App extends Component {
               <h1>Cadastro de Autores</h1>
             </div>
             <div className="content" id="content">
-              <AuthorForm></AuthorForm>
-              <AuthorsTable></AuthorsTable>
+              <Author></Author>
             </div>
           </div>            
         </div>
