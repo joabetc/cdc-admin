@@ -59,7 +59,7 @@ class App extends Component {
   }
 
   setPassword(event) {
-    this.setPassword({password: event.target.value});
+    this.setState({password: event.target.value});
   }
 
   render() {
