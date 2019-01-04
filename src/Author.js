@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import CustomInput from './components/CustomInput';
 import CustomSubmit from './components/CustomSubmit';
+import PubSub from 'pubsub-js';
 
 class AuthorForm extends Component {
 
@@ -31,8 +32,8 @@ class AuthorForm extends Component {
         senha: this.state.password
       }),
       success: function(response) {
-        this.props.updateListCallback(response);
-      }.bind(this),
+        PubSub.publish('author-list-update', response);
+      },
       error: function(error) {
         console.log('Error');
       }
@@ -111,6 +112,10 @@ export default class AuthorBox extends Component {
           this.setState({ list: response });
       }.bind(this)
     });
+
+    PubSub.subscribe('author-list-update', function(topic, newList) {
+      this.updateList(newList);
+    }.bind(this))
   }
 
   updateList(newList) {
