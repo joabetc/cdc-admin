@@ -20,7 +20,9 @@ export default class CustomInput extends Component {
 
   componentDidMount() {
     PubSub.subscribe("validation-error", function(topic, error) {
-      this.setState( { errorMessage: error.defaultMessage })
+      if (error.field === this.props.name) {
+        this.setState( { errorMessage: error.defaultMessage });
+      }
     }.bind(this));
   }
 }
