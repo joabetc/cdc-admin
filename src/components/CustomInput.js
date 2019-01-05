@@ -24,5 +24,9 @@ export default class CustomInput extends Component {
         this.setState( { errorMessage: error.defaultMessage });
       }
     }.bind(this));
+
+    PubSub.subscribe("clean-errors", function(topic) {
+      this.setState( { errorMessage: '' });
+    }.bind(this));
   }
 }

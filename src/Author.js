@@ -34,11 +34,15 @@ class AuthorForm extends Component {
       }),
       success: function(response) {
         PubSub.publish('author-list-update', response);
-      },
+        this.setState({ name: '', email: '', password: '' })
+      }.bind(this),
       error: function(error) {
         if (error.status === 400) {
           new ErrorHandler().publishErrors(error.responseJSON);
         }
+      },
+      beforeSend: function() {
+        PubSub.publish("clean-errors", {});
       }
     });
   }
