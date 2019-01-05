@@ -3,6 +3,7 @@ import $ from 'jquery';
 import CustomInput from './components/CustomInput';
 import CustomSubmit from './components/CustomSubmit';
 import PubSub from 'pubsub-js';
+import ErrorHandler from './ErrorHandler';
 
 class AuthorForm extends Component {
 
@@ -35,7 +36,9 @@ class AuthorForm extends Component {
         PubSub.publish('author-list-update', response);
       },
       error: function(error) {
-        console.log('Error');
+        if (error.status === 400) {
+          new ErrorHandler().publishErrors(error.responseJSON);
+        }
       }
     });
   }

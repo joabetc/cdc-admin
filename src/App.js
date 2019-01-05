@@ -30,7 +30,7 @@ class App extends Component {
             <div className="content" id="content">
               <AuthorBox />
             </div>
-          </div>            
+          </div>
         </div>
     );
   }
