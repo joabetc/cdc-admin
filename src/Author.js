@@ -103,7 +103,7 @@ class AuthorsTable extends Component {
   }
 }
 
-export default class AuthorBox extends Component {
+export class AuthorBox extends Component {
 
   constructor() {
     super();
@@ -132,8 +132,13 @@ export default class AuthorBox extends Component {
   render() {
     return (
       <div>
-        <AuthorForm updateListCallback={this.updateList}/>
-        <AuthorsTable list={this.state.list}/>
+        <div className="header">
+          <h1>Cadastro de Autores</h1>
+        </div>
+        <div className="content" id="content">
+          <AuthorForm updateListCallback={this.updateList}/>
+          <AuthorsTable list={this.state.list}/>
+        </div>
       </div>
     );
   }
